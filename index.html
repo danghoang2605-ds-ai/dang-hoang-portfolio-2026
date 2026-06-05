@@ -133,10 +133,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(14px);
 /* ====== ABOUT ====== */
 .about-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:40px;align-items:start}
 @media(max-width:760px){.about-grid{grid-template-columns:1fr}}
-.headshot{aspect-ratio:1/1;border-radius:var(--radius);background:
+.headshot{position:relative;overflow:hidden;aspect-ratio:1/1;border-radius:var(--radius);background:
   linear-gradient(135deg,rgba(61,123,255,.25),rgba(139,108,255,.25));
   border:1px solid var(--glass-bd);display:flex;align-items:center;justify-content:center;
   color:var(--faint);font-family:var(--mono);font-size:13px;text-align:center;padding:20px}
+.about-edu{margin-top:22px;padding:18px 20px;border:1px solid var(--glass-bd);border-radius:14px;background:rgba(255,255,255,.035)}
+.about-edu .ae-label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px}
+.about-edu .ae-deg{font-family:var(--display);font-weight:700;font-size:16.5px;letter-spacing:-.01em;margin-bottom:3px}
+.about-edu .ae-uni{color:var(--blue);font-size:14px;font-weight:500;margin-bottom:5px}
+.about-edu .ae-meta{font-family:var(--mono);font-size:11.5px;color:var(--faint);line-height:1.5}
+.thumb-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit}
+.modal-img{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;margin:14px 32px 6px;
+  background:linear-gradient(135deg,rgba(53,214,232,.16),rgba(139,108,255,.16))}
+.modal-img.thumb-fail{display:none}
 .about-grid p{color:var(--muted);font-size:17px;margin-bottom:16px;line-height:1.7}
 .about-grid p strong{color:var(--ink);font-weight:500}
 
@@ -184,8 +193,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(14px);
 .award{display:inline-block;font-family:var(--mono);font-size:11px;color:#ffe28a;background:rgba(255,200,80,.1);border:1px solid rgba(255,200,80,.25);padding:3px 9px;border-radius:7px;margin-left:6px}
 
 /* featured / flagship project card */
-.proj.featured{grid-column:1 / -1;flex-direction:row;position:relative;
-  box-shadow:0 30px 80px -34px rgba(91,61,240,.6)}
+.proj.featured{position:relative;box-shadow:0 30px 80px -34px rgba(91,61,240,.6)}
 .proj.featured::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.4px;
   background:linear-gradient(120deg,var(--cyan),var(--blue),var(--violet),var(--pink),var(--cyan));
   background-size:300% 300%;
@@ -195,10 +203,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(14px);
 .proj.featured::after{content:"";position:absolute;inset:-2px;border-radius:inherit;z-index:-1;
   background:linear-gradient(120deg,var(--cyan),var(--violet));filter:blur(22px);opacity:.22}
 @keyframes edge{to{background-position:300% 50%}}
-.proj.featured .proj-media{aspect-ratio:auto;width:40%;flex:none;border-bottom:none;border-right:1px solid var(--glass-bd)}
 .featured-flag{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--violet);margin-bottom:10px}
 .featured-flag svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-@media(max-width:760px){.proj.featured{flex-direction:column}.proj.featured .proj-media{width:100%;aspect-ratio:16/9;border-right:none;border-bottom:1px solid var(--glass-bd)}}
 
 /* ====== SKILLS ====== */
 .skill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -242,15 +248,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(14px);
 @media (prefers-reduced-motion: no-preference){.bar-row.show .bar-fill{animation:shimmer 5s linear infinite}}
 @keyframes shimmer{to{background-position:200% 0}}
 /* tools tile grid */
-.tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px}
-.tool-tile{display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 12px;border-radius:13px;
+.tool-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+.tool-tile{width:128px;display:flex;flex-direction:column;align-items:center;gap:11px;padding:18px 12px;border-radius:13px;
   background:rgba(255,255,255,.03);border:1px solid var(--glass-bd);transition:.28s;cursor:default}
 .tool-tile:hover{transform:translateY(-4px);border-color:rgba(120,160,255,.45);box-shadow:0 18px 40px -22px rgba(61,123,255,.5);background:rgba(61,123,255,.06)}
-.tool-tile .mono{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;
-  font-family:var(--display);font-weight:800;font-size:16px;color:var(--cyan);
-  background:linear-gradient(140deg,rgba(53,214,232,.14),rgba(139,108,255,.14));border:1px solid var(--glass-bd)}
+.tool-tile .ic{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(140deg,rgba(53,214,232,.14),rgba(139,108,255,.14));border:1px solid var(--glass-bd);transition:.28s}
+.tool-tile .ic svg{width:23px;height:23px;stroke:var(--cyan);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.tool-tile:hover .ic{box-shadow:0 0 18px -4px rgba(53,214,232,.5);border-color:rgba(53,214,232,.4)}
 .tool-tile .tn{font-size:12.5px;color:var(--muted);text-align:center}
 .tool-tile:hover .tn{color:var(--ink)}
+.proj-media canvas.deck-canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 
 /* ====== SERVICES ====== */
 .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -435,7 +443,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 .modal .mlinks a{font-size:13px;font-weight:500;color:var(--ink);display:inline-flex;align-items:center;gap:7px;
   background:var(--glass);border:1px solid var(--glass-bd);padding:9px 16px;border-radius:10px;transition:.2s}
 .modal .mlinks a:hover{border-color:var(--cyan);color:var(--cyan)}
-.modal-close{position:absolute;top:24px;right:24px;width:34px;height:34px;border-radius:50%;cursor:pointer;
+.modal-close{position:absolute;top:24px;right:24px;width:34px;height:34px;border-radius:50%;cursor:pointer;z-index:4;
   background:rgba(255,255,255,.06);border:1px solid var(--glass-bd);display:flex;align-items:center;justify-content:center;transition:.2s}
 .modal-close:hover{background:rgba(255,255,255,.12)}
 .modal-close svg{width:16px;height:16px;stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round}
@@ -468,7 +476,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
     <div class="logo">Dang<span>.</span>Hoang</div>
     <div class="nav-links">
       <a href="#about">About</a>
-      <a href="#education">Education</a>
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
       <a href="#skills">Skills</a>
@@ -482,7 +489,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 
 <div class="mobile-panel" id="mobilePanel">
   <a href="#about">About</a>
-  <a href="#education">Education</a>
   <a href="#experience">Experience</a>
   <a href="#projects">Projects</a>
   <a href="#skills">Skills</a>
@@ -519,12 +525,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 
 <!-- ============ STATS ============ -->
 <section style="padding-top:0">
-  <div class="wrap">
-    <div class="stats reveal">
+  <div class="wrap reveal">
+    <div class="eyebrow">At a glance</div>
+    <div class="stats">
       <div class="stat"><div class="n" data-count="4.0" data-dec="1">4.0</div><div class="l">GPA · Presidential Scholar</div></div>
-      <div class="stat"><div class="n" data-count="5" data-suffix="+">5+</div><div class="l">Research &amp; industry roles</div></div>
+      <div class="stat"><div class="n" data-count="5" data-suffix="+">5+</div><div class="l">Roles &amp; internships</div></div>
       <div class="stat"><div class="n" data-count="7.6" data-dec="1" data-suffix="M">7.6M</div><div class="l">Records analyzed (DataFest)</div></div>
-      <div class="stat"><div class="n" data-count="3">3</div><div class="l">Award-winning projects</div></div>
+      <div class="stat"><div class="n" data-count="8">8</div><div class="l">Awards &amp; scholarships</div></div>
     </div>
   </div>
 </section>
@@ -533,39 +540,21 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 <section id="about" data-screen-label="About">
   <div class="wrap reveal">
     <div class="eyebrow">About</div>
-    <h2 class="sec">Researcher who ships.</h2>
+    <h2 class="sec">Math, ML, and shipping.</h2>
     <div class="about-grid">
-      <div class="headshot">
+      <div class="headshot" data-img="headshot">
         [ your headshot ]
       </div>
       <div>
-        <p>I'm <strong>Dang Hoang</strong>, a Data Science &amp; Mathematics student in the UGA Honors Program (B.S., 2025 to 2028), minoring in Business and carrying a 4.0 GPA as a Presidential Scholar.</p>
+        <p>I'm <strong>Dang Hoang</strong>, a Data Science &amp; Mathematics student in the UGA Honors Program (B.S., 2025 — 2028), minoring in Business and carrying a 4.0 GPA as a Presidential Scholar.</p>
         <p>I work across the full ML stack, fine-tuning <strong>LLMs</strong> for clinical document understanding, building <strong>computer-vision pipelines</strong> for medical diagnostics and disaster assessment, and grounding it all in real mathematical rigor, from Cauchy sequences to models in production.</p>
         <p>Currently an <strong>AI Engineer Intern at FPT Software AI Center</strong>, a Data Analytics member at <strong>Equifax</strong>, and Project Manager &amp; ML Engineer at <strong>AI@UGA</strong>. I care about systems that are accurate, safe, and genuinely useful.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ EDUCATION ============ -->
-<section id="education" data-screen-label="Education">
-  <div class="wrap reveal">
-    <div class="eyebrow">Education</div>
-    <h2 class="sec">Where I study.</h2>
-    <div class="edu-grid">
-      <div class="card edu-main">
-        <div class="deg">B.S. in Data Science &amp; Mathematics</div>
-        <div class="uni">The University of Georgia, Honors Program</div>
-        <div class="when">Athens, Georgia · Aug 2025 to May 2028 · Minor in Business</div>
-        <div class="pts">
-          <span>Presidential Scholar</span>
-          <span>Spark Award in Computer Science</span>
-          <span>ASA DataFest Best Visualization</span>
+        <div class="about-edu">
+          <div class="ae-label">Education</div>
+          <div class="ae-deg">B.S. in Data Science &amp; Mathematics, Minor in Business</div>
+          <div class="ae-uni">The University of Georgia, Honors Program</div>
+          <div class="ae-meta">Athens, Georgia · Aug 2025 — May 2028 · GPA 4.0, Presidential Scholar</div>
         </div>
-      </div>
-      <div class="card edu-side">
-        <div class="row"><div class="big">4.0</div><div class="desc">Cumulative GPA on a 4.0 scale, Presidential Scholar.</div></div>
-        <div class="row"><div class="big word">Honors</div><div class="desc">Member of the UGA Honors Program.</div></div>
       </div>
     </div>
   </div>
@@ -581,7 +570,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
       <div class="tl-item">
         <div class="tl-top">
           <div><span class="tl-role">AI Engineer Intern</span> · <span class="tl-org">FPT Software AI Center</span></div>
-          <div class="tl-date">May 2026 to Present · Hanoi</div>
+          <div class="tl-date">May 2026 — Present · Hanoi</div>
         </div>
         <ul>
           <li>Engineered deep-learning diagnostic pipelines using YOLO and ResNet architectures, with optimized cloud inference that cut dev/test latency 35% and reached 93% automated anomaly-detection accuracy for enterprise healthcare systems.</li>
@@ -591,8 +580,19 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 
       <div class="tl-item">
         <div class="tl-top">
+          <div><span class="tl-role">Peer Tutor</span> · <span class="tl-org">UGA Office for Student Success and Achievement</span></div>
+          <div class="tl-date">Apr 2026 — Present · Athens</div>
+        </div>
+        <ul>
+          <li>Delivered one-on-one and small-group tutoring for undergraduates in core quantitative subjects, including Calculus, Statistics, and Computer Science.</li>
+          <li>Designed personalized, data-informed study plans to bridge knowledge gaps, prioritizing conceptual clarity and analytical reasoning over rote problem-solving.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-top">
           <div><span class="tl-role">Data Analytics Member</span> · <span class="tl-org">Equifax</span></div>
-          <div class="tl-date">Jan 2026 to Present · Atlanta</div>
+          <div class="tl-date">Jan 2026 — Present · Atlanta</div>
         </div>
         <ul>
           <li>Evaluated predictive modeling frameworks in Python across 40+ hours of training, optimizing credit-risk accuracy by 15%.</li>
@@ -603,7 +603,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
       <div class="tl-item">
         <div class="tl-top">
           <div><span class="tl-role">Project Manager &amp; ML Engineer</span> · <span class="tl-org">AI@UGA</span></div>
-          <div class="tl-date">Jan 2026 to Present · Athens</div>
+          <div class="tl-date">Jan 2026 — Present · Athens</div>
         </div>
         <ul>
           <li>Directed a 6-member team building YOLOv8 + Mask R-CNN instance-segmentation pipelines over 7,357 post-hurricane drone images, optimizing focal loss to accelerate automated damage assessment 40%.</li>
@@ -615,7 +615,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
       <div class="tl-item">
         <div class="tl-top">
           <div><span class="tl-role">Undergraduate Researcher, Directed Reading</span> · <span class="tl-org">UGA Mathematics</span></div>
-          <div class="tl-date">Jan to May 2026 · Athens</div>
+          <div class="tl-date">Jan — May 2026 · Athens</div>
         </div>
         <ul>
           <li>Modeled number systems with Cauchy sequences, rigorously proving 100% of field axioms.</li>
@@ -643,7 +643,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
     <div class="proj-grid">
 
       <div class="card proj featured" data-cat="healthcare vision nlp" data-modal="fpt">
-        <div class="proj-media">[ enterprise healthcare AI, high-level only ]</div>
+        <div class="proj-media" data-img="clinical">[ enterprise healthcare AI, high-level only ]</div>
         <div class="proj-body">
           <div class="featured-flag">
             <svg viewBox="0 0 24 24"><path d="M12 3l2.09 4.26L19 8l-3.45 3.36L16.18 16 12 13.77 7.82 16l.63-4.64L5 8l4.91-.74L12 3z"/></svg>
@@ -651,7 +651,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
           </div>
           <div class="proj-tag">Computer Vision · LLM · Healthcare</div>
           <h3>Clinical AI Diagnostics &amp; NLP</h3>
-          <div class="proj-meta">FPT Software AI Center · May 2026 to Present</div>
+          <div class="proj-meta">FPT Software AI Center · May 2026 — Present</div>
           <p>Enterprise healthcare AI built during my FPT Software AI Center internship: YOLO/ResNet diagnostic pipelines with 93% anomaly-detection accuracy, and an LLM framework parsing 10,000+ medical records at 94% extraction accuracy. <em>Described at a high level.</em></p>
           <div class="chips"><span>YOLO</span><span>ResNet</span><span>LLM fine-tuning</span><span>Cloud inference</span></div>
           <div class="proj-links">
@@ -660,84 +660,44 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
         </div>
       </div>
 
+      <div class="card proj featured" data-cat="vision" data-modal="fallentree">
+        <div class="proj-media" data-img="fallentree">[ drone segmentation overlay ]</div>
+        <div class="proj-body">
+          <div class="featured-flag">
+            <svg viewBox="0 0 24 24"><path d="M12 3l2.09 4.26L19 8l-3.45 3.36L16.18 16 12 13.77 7.82 16l.63-4.64L5 8l4.91-.74L12 3z"/></svg>
+            Flagship work
+          </div>
+          <div class="proj-tag">Computer Vision · Deep Learning</div>
+          <h3>Fallen Tree Detection</h3>
+          <div class="proj-meta">AI@UGA · 2026</div>
+          <p>Instance-segmentation pipelines (YOLOv8 + Mask R-CNN) over 7,357 post-hurricane drone images to automate disaster damage assessment, with cross-photo matching that eliminated 100% of tree double-counting.</p>
+          <div class="chips"><span>YOLOv8</span><span>Mask R-CNN</span><span>Roboflow</span><span>Google Colab</span></div>
+          <div class="proj-links">
+            <a href="#contact"><svg viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg> Ask me about it</a>
+          </div>
+        </div>
+      </div>
+
       <div class="card proj" data-cat="nlp" data-modal="orion">
-        <div class="proj-media">
+        <div class="proj-media" data-img="orion">
           [ live graph demo / screenshot ]
         </div>
         <div class="proj-body">
           <div class="proj-tag">NLP · RAG · Graph</div>
           <h3>Orion · UGA Semantic Course Map<span class="award">Honorable Mention</span></h3>
-          <div class="proj-meta">Cognitive Science Club, GenAI Competition v3.0 · Feb to Apr 2026</div>
+          <div class="proj-meta">Cognitive Science Club, GenAI Competition v3.0 · Feb — Apr 2026</div>
           <p>NLP pipeline mapping 1,000+ courses with sentence-transformers + UMAP, surfaced through a React/Cytoscape interface and a multi-LLM RAG chatbot for academic exploration.</p>
           <div class="chips"><span>BeautifulSoup</span><span>UMAP</span><span>React</span><span>Cytoscape</span><span>Flask</span></div>
           <div class="proj-links">
+            <a href="orion.pdf" target="_blank"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg> Slides</a>
             <a href="#" target="_blank"><svg viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg> Live demo</a>
             <a href="https://github.com/ugacogsci/semantic-course-map" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/></svg> GitHub</a>
           </div>
         </div>
       </div>
 
-      <div class="card proj" data-cat="vision healthcare" data-modal="smartsight">
-        <div class="proj-media">[ hand-gesture tracking demo ]</div>
-        <div class="proj-body">
-          <div class="proj-tag">Computer Vision · Health</div>
-          <h3>SmartSight Vision Testing<span class="award">INOVA Gold 2024</span></h3>
-          <div class="proj-meta">YOLOv8, OpenCV, Python/Flask · Oct 2023 to May 2025</div>
-          <p>A Python/Flask clinical dashboard running YOLOv8 + OpenCV for real-time hand-gesture tracking, cutting testing turnaround 45% and opening barrier-free diagnostics for non-verbal patients.</p>
-          <div class="chips"><span>YOLOv8</span><span>OpenCV</span><span>Flask</span><span>Python</span></div>
-          <div class="proj-links">
-            <a href="#" target="_blank"><svg viewBox="0 0 24 24"><path d="M5 4l14 8-14 8V4z"/></svg> YouTube</a>
-            <a href="https://github.com/danghoang2605-ds-ai/smart-sight-vision-testing" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/></svg> GitHub</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card proj" data-cat="healthcare" data-modal="datafest">
-        <div class="proj-media">[ R visualizations / award photo ]</div>
-        <div class="proj-body">
-          <div class="proj-tag">Data Viz · Healthcare</div>
-          <h3>One Hospital, Two Utilization Systems<span class="award">Best Viz · DataFest</span></h3>
-          <div class="proj-meta">ASA DataFest 2026 · Apr 2026</div>
-          <p>Analyzed 7.6M patient encounters in a hackathon to uncover chronic-care utilization patterns and predictive risk factors, designing executive-facing R visualizations that translated stats into policy recommendations.</p>
-          <div class="chips"><span>R</span><span>ggplot2</span><span>Statistics</span></div>
-          <div class="proj-links">
-            <a href="#" target="_blank"><svg viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg> Write-up</a>
-            <a href="#" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/></svg> GitHub</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card proj" data-cat="fintech nlp" data-modal="budgetmate">
-        <div class="proj-media">[ app screenshots ]</div>
-        <div class="proj-body">
-          <div class="proj-tag">Android · FinTech · LLM</div>
-          <h3>BudgetMate</h3>
-          <div class="proj-meta">Java, MVVM, LLM API, Android SDK · Jan 2024 to May 2025</div>
-          <p>An Android budgeting app with an LLM-powered advisory chatbot and custom Java data-aggregation for real-time daily net flows, reaching 1,000+ active users at 90% retention.</p>
-          <div class="chips"><span>Java</span><span>MVVM</span><span>LLM API</span><span>Android SDK</span></div>
-          <div class="proj-links">
-            <a href="#" target="_blank"><svg viewBox="0 0 24 24"><path d="M5 4l14 8-14 8V4z"/></svg> Demo</a>
-            <a href="https://github.com/danghoang2605-ds-ai/BudgetMate" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/></svg> GitHub</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card proj" data-cat="web" data-modal="weather">
-        <div class="proj-media">[ weather dashboard screenshot ]</div>
-        <div class="proj-body">
-          <div class="proj-tag">Web · APIs · Data</div>
-          <h3>Weather Forecast Application</h3>
-          <div class="proj-meta">Docker, MySQL, OpenWeather API</div>
-          <p>A real-time weather app pulling live data from the OpenWeather API into a SQL database for querying and historical tracking, fully containerized with Docker for a reproducible environment and a clean data-visualization interface.</p>
-          <div class="chips"><span>Docker</span><span>MySQL</span><span>REST API</span><span>HTML/CSS</span></div>
-          <div class="proj-links">
-            <a href="https://github.com/danghoang2605-ds-ai/weather-forecast-app" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/></svg> GitHub</a>
-          </div>
-        </div>
-      </div>
-
       <div class="card proj" data-cat="vision" data-modal="drive">
-        <div class="proj-media">[ trajectory / CV visualization, coming soon ]</div>
+        <div class="proj-media" data-img="drive">[ trajectory / CV visualization, coming soon ]</div>
         <div class="proj-body">
           <div class="proj-tag">Autonomous · Sensor Fusion · Upcoming</div>
           <h3>DRIVE · Vehicle &amp; Infrastructure</h3>
@@ -746,6 +706,67 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
           <div class="chips"><span>Deep Learning</span><span>Multi-sensor fusion</span><span>IoT</span></div>
           <div class="proj-links">
             <a href="#" target="_blank"><svg viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg> Soon</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card proj" data-cat="vision healthcare" data-modal="smartsight">
+        <div class="proj-media" data-img="smartsight">[ hand-gesture tracking demo ]</div>
+        <div class="proj-body">
+          <div class="proj-tag">Computer Vision · Health</div>
+          <h3>SmartSight Vision Testing<span class="award">INOVA Gold 2024</span></h3>
+          <div class="proj-meta">YOLOv8, OpenCV, Python/Flask · Oct 2023 — May 2025</div>
+          <p>A Python/Flask clinical dashboard running YOLOv8 + OpenCV for real-time hand-gesture tracking, cutting testing turnaround 45% and opening barrier-free diagnostics for non-verbal patients.</p>
+          <div class="chips"><span>YOLOv8</span><span>OpenCV</span><span>Flask</span><span>Python</span></div>
+          <div class="proj-links">
+            <a href="smartsight.pdf" target="_blank"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg> Slides</a>
+            <a href="#" target="_blank"><svg viewBox="0 0 24 24"><path d="M5 4l14 8-14 8V4z"/></svg> YouTube</a>
+            <a href="https://github.com/danghoang2605-ds-ai/smart-sight-vision-testing" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/></svg> GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card proj" data-cat="healthcare" data-modal="datafest">
+        <div class="proj-media" data-img="datafest">[ R visualizations / award photo ]</div>
+        <div class="proj-body">
+          <div class="proj-tag">Data Viz · Healthcare</div>
+          <h3>One Hospital, Two Utilization Systems<span class="award">Best Visualization</span></h3>
+          <div class="proj-meta">ASA DataFest 2026 · Apr 2026</div>
+          <p>Analyzed 7.6M patient encounters in a hackathon to uncover chronic-care utilization patterns and predictive risk factors, designing executive-facing R visualizations that translated stats into policy recommendations.</p>
+          <div class="chips"><span>R</span><span>ggplot2</span><span>Statistics</span></div>
+          <div class="proj-links">
+            <a href="datafest.pdf" target="_blank"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg> Slides</a>
+            <a href="#" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/></svg> GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card proj" data-cat="fintech nlp" data-modal="budgetmate">
+        <div class="proj-media" data-img="budgetmate">[ app screenshots ]</div>
+        <div class="proj-body">
+          <div class="proj-tag">Android · FinTech · LLM</div>
+          <h3>BudgetMate</h3>
+          <div class="proj-meta">Java, MVVM, LLM API, Android SDK · Jan 2024 — May 2025</div>
+          <p>An Android budgeting app with an LLM-powered advisory chatbot and custom Java data-aggregation for real-time daily net flows, reaching 1,000+ active users at 90% retention.</p>
+          <div class="chips"><span>Java</span><span>MVVM</span><span>LLM API</span><span>Android SDK</span></div>
+          <div class="proj-links">
+            <a href="budgetmate.pdf" target="_blank"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg> Slides</a>
+            <a href="#" target="_blank"><svg viewBox="0 0 24 24"><path d="M5 4l14 8-14 8V4z"/></svg> Demo</a>
+            <a href="https://github.com/danghoang2605-ds-ai/BudgetMate" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/></svg> GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card proj" data-cat="web" data-modal="weather">
+        <div class="proj-media" data-img="weather">[ weather dashboard screenshot ]</div>
+        <div class="proj-body">
+          <div class="proj-tag">Web · APIs · Data</div>
+          <h3>Weather Forecast Application</h3>
+          <div class="proj-meta">Docker, MySQL, OpenWeather API</div>
+          <p>A real-time weather app pulling live data from the OpenWeather API into a SQL database for querying and historical tracking, fully containerized with Docker for a reproducible environment and a clean data-visualization interface.</p>
+          <div class="chips"><span>Docker</span><span>MySQL</span><span>REST API</span><span>HTML/CSS</span></div>
+          <div class="proj-links">
+            <a href="https://github.com/danghoang2605-ds-ai/weather-forecast-app" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/></svg> GitHub</a>
           </div>
         </div>
       </div>
@@ -799,15 +820,19 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
       <div class="sk-panel" data-cat="2" hidden>
         <div class="sk-panel-title">Tools &amp; Platforms</div>
         <div class="tool-grid">
-          <div class="tool-tile"><span class="mono">GH</span><span class="tn">GitHub</span></div>
-          <div class="tool-tile"><span class="mono">Dk</span><span class="tn">Docker</span></div>
-          <div class="tool-tile"><span class="mono">My</span><span class="tn">MySQL</span></div>
-          <div class="tool-tile"><span class="mono">BI</span><span class="tn">Power BI</span></div>
-          <div class="tool-tile"><span class="mono">JL</span><span class="tn">JupyterLab</span></div>
-          <div class="tool-tile"><span class="mono">Co</span><span class="tn">Google Colab</span></div>
-          <div class="tool-tile"><span class="mono">RS</span><span class="tn">RStudio</span></div>
-          <div class="tool-tile"><span class="mono">Rf</span><span class="tn">Roboflow</span></div>
-          <div class="tool-tile"><span class="mono">VS</span><span class="tn">VS Code</span></div>
+          <div class="tool-tile"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.2"/><circle cx="6" cy="18" r="2.2"/><circle cx="17" cy="8" r="2.2"/><path d="M6 8.2v7.6M17 10.2c0 4-7 1.6-7 5.6"/></svg></span><span class="tn">GitHub</span></div>
+          <div class="tool-tile"><span class="ic"><svg viewBox="0 0 24 24"><rect x="3.6" y="10" width="3.2" height="3.2"/><rect x="7.6" y="10" width="3.2" height="3.2"/><rect x="11.6" y="10" width="3.2" height="3.2"/><rect x="7.6" y="6" width="3.2" height="3.2"/><path d="M3 13.5h16.5c0 3-2 4.5-5 4.5H8c-3 0-5-1.8-5-4.5z"/></svg></span><span class="tn">Docker</span></div>
+          <div class="tool-tile"><span class="ic"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/></svg></span><span class="tn">MySQL</span></div>
+          <div class="tool-tile"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 21V11M9.3 21V4M14.6 21v-6M20 21V8"/><path d="M3 21h18"/></svg></span><span class="tn">Power BI</span></div>
+          <div class="tool-tile"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.4"/><path d="M4.5 9c4 3.2 11 3.2 15 0M4.5 15c4-3.2 11-3.2 15 0"/></svg></span><span class="tn">JupyterLab</span></div>
+          <div class="tool-tile"><span class="ic"><svg viewBox="0 0 24 24"><path d="M9.5 8 5.5 12l4 4M14.5 8l4 4-4 4"/></svg></span><span class="tn">Google Colab</span></div>
+          <div class="tool-tile"><span class="ic"><svg viewBox="0 0 24 24"><path d="M8 19V5h4.5a3.5 3.5 0 0 1 0 7H8m4.5 0L17 19"/></svg></span><span class="tn">RStudio</span></div>
+          <div class="tool-tile"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16"/><circle cx="12" cy="12" r="2.6"/></svg></span><span class="tn">Roboflow</span></div>
+          <div class="tool-tile"><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M9 9.5 6.5 12 9 14.5M14.5 9.5 17 12l-2.5 2.5"/></svg></span><span class="tn">VS Code</span></div>
+          <div class="tool-tile"><span class="ic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span><span class="tn">Notion</span></div>
+          <div class="tool-tile"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="6" cy="7" r="2"/><circle cx="18" cy="7" r="2"/><circle cx="12" cy="17" r="2"/><path d="M7.7 8.4 10.6 15.4M16.3 8.4 13.4 15.4M8 7h8"/></svg></span><span class="tn">Hugging Face</span></div>
+          <div class="tool-tile"><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9.5l3 2.5-3 2.5M13 14.5h4"/></svg></span><span class="tn">Linux</span></div>
+          <div class="tool-tile"><span class="ic"><svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v4h4"/><path d="M9.5 12l2 2.5-2 2.5M14.5 12l-2 2.5 2 2.5"/></svg></span><span class="tn">Overleaf</span></div>
         </div>
       </div>
 
@@ -850,16 +875,16 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
     <h2 class="sec">Awards.</h2>
     <div class="award-grid">
       <div class="card award-item">
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
-        <div><h5>Presidential Scholar, 4.0 GPA</h5><p>The University of Georgia, Honors Program</p></div>
-      </div>
-      <div class="card award-item">
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.1 2.7 2.5 6 2.5s6-1.4 6-2.5v-5"/><path d="M22 10v6"/></svg></div>
-        <div><h5>Classic City Scholarship</h5><p>The University of Georgia</p></div>
-      </div>
-      <div class="card award-item">
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg></div>
         <div><h5>Best Visualization Award</h5><p>ASA DataFest 2026, UGA Department of Statistics</p></div>
+      </div>
+      <div class="card award-item">
+        <div class="ic"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <div><h5>Spark Award in Computer Science</h5><p>UGA School of Computing</p></div>
+      </div>
+      <div class="card award-item">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
+        <div><h5>Presidential Scholar, 4.0 GPA</h5><p>The University of Georgia, Honors Program</p></div>
       </div>
       <div class="card award-item">
         <div class="ic"><svg viewBox="0 0 24 24"><polygon points="12 2 14.6 8.6 21.5 9 16.2 13.5 18 20.3 12 16.5 6 20.3 7.8 13.5 2.5 9 9.4 8.6 12 2"/></svg></div>
@@ -867,15 +892,15 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
       </div>
       <div class="card award-item">
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15"/><path d="M11 12 5.43 2.31"/><path d="m13 12 5.57-9.69"/><path d="M8 7h8"/><circle cx="12" cy="17" r="5"/><path d="M12 18v-2h-.5"/></svg></div>
-        <div><h5>Gold Medal, SmartSight</h5><p>INOVA 2024</p></div>
+        <div><h5>Gold Medal, SmartSight</h5><p>INOVA 2024, 48th International Invention Show</p></div>
       </div>
       <div class="card award-item">
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg></div>
         <div><h5>Kermit Hutcheson Award in Statistics</h5><p>UGA Department of Statistics</p></div>
       </div>
       <div class="card award-item">
-        <div class="ic"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-        <div><h5>Spark Award in Computer Science</h5><p>The University of Georgia</p></div>
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.1 2.7 2.5 6 2.5s6-1.4 6-2.5v-5"/><path d="M22 10v6"/></svg></div>
+        <div><h5>Classic City Scholarship</h5><p>The University of Georgia</p></div>
       </div>
       <div class="card award-item">
         <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg></div>
@@ -892,23 +917,28 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
     <h2 class="sec">Leadership.</h2>
     <div class="lead-grid">
       <div class="card lead-item">
+        <div class="role">Finance Chair, Executive Board</div>
+        <div class="org">AI@UGA · 2026 — Present</div>
+        <p>Serve on the AI@UGA executive board, managing the organization's budget and finances alongside my project and engineering work.</p>
+      </div>
+      <div class="card lead-item">
         <div class="role">Student Ambassador</div>
-        <div class="org">Franklin College of Arts &amp; Sciences · Mar 2026 to Present</div>
+        <div class="org">Franklin College of Arts &amp; Sciences · Mar 2026 — Present</div>
         <p>Represent Franklin College across 15+ events, including tours, orientation, and tabling, driving prospective-student engagement.</p>
       </div>
       <div class="card lead-item">
         <div class="role">ELCA Influencer</div>
-        <div class="org">UGA Connect Abroad · Berlin &amp; Munich · Sep 2025 to Mar 2026</div>
+        <div class="org">UGA Connect Abroad · Berlin &amp; Munich · Sep 2025 — Mar 2026</div>
         <p>Led digital outreach on Instagram &amp; TikTok, spotlighting academic and cultural immersion during a study-away program.</p>
       </div>
       <div class="card lead-item">
         <div class="role">VP of Operations (PR &amp; Finance)</div>
-        <div class="org">Life's So Drama Club · Hanoi · Oct 2022 to May 2025</div>
+        <div class="org">Life's So Drama Club · Hanoi · Oct 2022 — May 2025</div>
         <p>Directed a $15,000 budget for a sold-out 800-attendee production supporting UNICEF, with 25,000+ online followers.</p>
       </div>
       <div class="card lead-item">
         <div class="role">Head of Technology &amp; Finance</div>
-        <div class="org">Hanoi Food Rescue · Hanoi · Oct 2022 to May 2025</div>
+        <div class="org">Hanoi Food Rescue · Hanoi · Oct 2022 — May 2025</div>
         <p>Ran a data-driven supply chain across 50 partnerships, an 800-ton logistics operation distributing 90,000 meals, while allocating a $15,000 budget to maximize resource efficiency for the underserved.</p>
       </div>
     </div>
@@ -977,6 +1007,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
       <h3 id="modalTitle"></h3>
       <div class="mmeta" id="modalMeta"></div>
     </div>
+    <div class="modal-img" id="modalImg" style="display:none"></div>
     <div class="modal-body" id="modalBody"></div>
   </div>
 </div>
@@ -984,6 +1015,17 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 <script>
 const PALETTE=[[53,214,232],[61,123,255],[139,108,255]];
 const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* shared image loader: tries png/jpg/jpeg/webp, falls back to placeholder */
+function loadThumb(el, base, alt, onfail){
+  const exts=['png','jpg','jpeg','webp']; let i=0;
+  const img=document.createElement('img');
+  img.className='thumb-img'; img.alt=alt||'';
+  img.onload=()=>{ el.classList.add('has-img'); };
+  img.onerror=()=>{ i++; if(i<exts.length){ img.src=base+'.'+exts[i]; } else { img.remove(); el.classList.add('thumb-fail'); if(onfail) onfail(); } };
+  img.src=base+'.'+exts[0];
+  el.appendChild(img);
+}
 
 /* ===== Interactive constellation starfield ===== */
 (function(){
@@ -1306,7 +1348,8 @@ const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
     fpt:{
       tag:'Computer Vision · LLM · Healthcare',
       title:'Clinical AI Diagnostics & NLP',
-      meta:'FPT Software AI Center, AI Engineer Intern · May 2026 to Present',
+      img:'clinical',
+      meta:'FPT Software AI Center, AI Engineer Intern · May 2026 — Present',
       body:'Enterprise healthcare AI work during my FPT Software AI Center internship, described here at a high level.',
       points:[
         'Engineered deep-learning diagnostic pipelines using YOLO and ResNet architectures, with optimized cloud inference that cut dev/test latency 35% and reached 93% automated anomaly-detection accuracy for enterprise healthcare systems.',
@@ -1315,10 +1358,26 @@ const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
       tags:['YOLO','ResNet','LLM fine-tuning','Cloud inference','NLP'],
       links:[['#contact','Ask me about it']]
     },
+    fallentree:{
+      tag:'Computer Vision · Deep Learning',
+      title:'Fallen Tree Detection',
+      img:'fallentree',
+      meta:'AI@UGA, Project Manager & ML Engineer · 2026',
+      body:'A computer-vision system that automates post-hurricane disaster damage assessment from drone imagery, led with a 6-person engineering team.',
+      points:[
+        'Built YOLOv8 and Mask R-CNN instance-segmentation pipelines over 7,357 post-hurricane drone images, optimizing focal loss to accelerate damage assessment 40%.',
+        'Coordinated Roboflow polygon annotation and cross-photo matching on raw, ungeoreferenced photography, eliminating 100% of tree double-counting via dual-model training on Google Colab.',
+        'Engineered geometric post-processing (mask skeletonization with orthogonal width profiles) to estimate frustum volumes from perspective geometry.',
+        'Ran Agile sprints in Notion to keep 100% faculty alignment.'
+      ],
+      tags:['YOLOv8','Mask R-CNN','Roboflow','Google Colab','Notion'],
+      links:[['#contact','Ask me about it']]
+    },
     orion:{
       tag:'NLP · RAG · Graph',
       title:'Orion, UGA Semantic Course Map',
-      meta:'Cognitive Science Club, GenAI Competition v3.0, Honorable Mention · Feb to Apr 2026',
+      img:'orion',
+      meta:'Cognitive Science Club, GenAI Competition v3.0, Honorable Mention · Feb — Apr 2026',
       body:'A semantic map that helps students explore the UGA curriculum by meaning rather than by department. Received an Honorable Mention at the UGA Generative AI Competition 3.0.',
       points:[
         'Parsed the curriculum with BeautifulSoup and built an NLP pipeline using sentence-transformers and UMAP to map 1,000+ courses.',
@@ -1327,12 +1386,13 @@ const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
         'Led the project documentation, a key judging criterion, detailing technical choices, goals, and tools.'
       ],
       tags:['BeautifulSoup','sentence-transformers','UMAP','React','Cytoscape','Flask'],
-      links:[['#','Live demo'],['https://github.com/ugacogsci/semantic-course-map','GitHub']]
+      links:[['orion.pdf','Slides'],['#','Live demo'],['https://github.com/ugacogsci/semantic-course-map','GitHub']]
     },
     smartsight:{
       tag:'Computer Vision · Health',
       title:'SmartSight Vision Testing',
-      meta:'INOVA 2024 Gold Medal · Oct 2023 to May 2025',
+      img:'smartsight',
+      meta:'INOVA 2024 Gold Medal · Oct 2023 — May 2025',
       body:'A clinical dashboard that makes vision testing accessible for non-verbal patients through real-time gesture recognition.',
       points:[
         'Engineered a Python/Flask clinical dashboard deploying YOLOv8 and OpenCV for real-time automated hand-gesture tracking.',
@@ -1340,11 +1400,12 @@ const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
         'Secured accessible, barrier-free diagnostic pathways for non-verbal patients.'
       ],
       tags:['YOLOv8','OpenCV','Python','Flask'],
-      links:[['#','YouTube'],['https://github.com/danghoang2605-ds-ai/smart-sight-vision-testing','GitHub']]
+      links:[['smartsight.pdf','Slides'],['#','YouTube'],['https://github.com/danghoang2605-ds-ai/smart-sight-vision-testing','GitHub']]
     },
     datafest:{
       tag:'Data Viz · Healthcare',
       title:'One Hospital, Two Utilization Systems',
+      img:'datafest',
       meta:'ASA DataFest 2026, Best Visualization Award · Apr 2026',
       body:'A competition project turning a very large clinical dataset into clear, decision-ready visuals.',
       points:[
@@ -1353,12 +1414,13 @@ const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
         'Awarded Best Visualization at ASA DataFest 2026.'
       ],
       tags:['R','ggplot2','Statistics'],
-      links:[['#','Write-up'],['#','GitHub']]
+      links:[['datafest.pdf','Slides'],['#','GitHub']]
     },
     budgetmate:{
       tag:'Android · FinTech · LLM',
       title:'BudgetMate',
-      meta:'Java, MVVM, LLM API, Android SDK · Jan 2024 to May 2025',
+      img:'budgetmate',
+      meta:'Java, MVVM, LLM API, Android SDK · Jan 2024 — May 2025',
       body:'A mobile budgeting app pairing an LLM advisor with custom financial aggregation.',
       points:[
         'Integrated an LLM API advisory chatbot using prompt engineering to deliver real-time budgeting tips for 1,000+ active users.',
@@ -1366,11 +1428,12 @@ const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
         'Sustained a 90% user retention rate.'
       ],
       tags:['Java','MVVM','LLM API','Android SDK'],
-      links:[['#','Demo'],['https://github.com/danghoang2605-ds-ai/BudgetMate','GitHub']]
+      links:[['budgetmate.pdf','Slides'],['#','Demo'],['https://github.com/danghoang2605-ds-ai/BudgetMate','GitHub']]
     },
     weather:{
       tag:'Web · APIs · Data',
       title:'Weather Forecast Application',
+      img:'weather',
       meta:'Docker, MySQL, OpenWeather API',
       body:'A real-time weather forecasting app that turns live API data into a queryable, containerized service.',
       points:[
@@ -1384,6 +1447,7 @@ const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
     drive:{
       tag:'Autonomous · Sensor Fusion · Upcoming',
       title:'DRIVE, Vehicle & Infrastructure',
+      img:'drive',
       meta:'VIPR Team · Fall 2026 (in progress)',
       body:'An upcoming research project on autonomous driving and smart-city infrastructure.',
       points:[
@@ -1400,6 +1464,10 @@ const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const d=DATA[key]; if(!d) return;
     lastFocus=document.activeElement;
     elTag.textContent=d.tag; elTitle.textContent=d.title; elMeta.textContent=d.meta;
+    const mi=document.getElementById('modalImg');
+    mi.innerHTML=''; mi.classList.remove('thumb-fail');
+    if(d.img){ mi.style.display='block'; loadThumb(mi,d.img,d.title,()=>{mi.style.display='none';}); }
+    else { mi.style.display='none'; }
     let html='<p>'+d.body+'</p>';
     if(d.points&&d.points.length){ html+='<ul>'+d.points.map(p=>'<li>'+p+'</li>').join('')+'</ul>'; }
     if(d.tags&&d.tags.length){ html+='<div class="mchips">'+d.tags.map(t=>'<span>'+t+'</span>').join('')+'</div>'; }
@@ -1425,9 +1493,49 @@ const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(h){ h.setAttribute('tabindex','0'); h.setAttribute('role','button');
       h.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();open(key);} }); }
   });
-  closeBtn.addEventListener('click',close);
-  back.addEventListener('click',e=>{ if(e.target===back) close(); });
+  back.addEventListener('click',e=>{ if(e.target===back || e.target.closest('.modal-close')) close(); });
   addEventListener('keydown',e=>{ if(e.key==='Escape'&&back.classList.contains('open')) close(); });
+})();
+
+/* ===== PDF deck thumbnails (render page 1 of each slide deck) ===== */
+(function(){
+  const decks=[...document.querySelectorAll('.proj-media[data-pdf]')];
+  if(!decks.length) return;
+  const SRC='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+  const s=document.createElement('script');
+  s.src=SRC+'pdf.min.js';
+  s.onload=()=>{
+    try{ window.pdfjsLib.GlobalWorkerOptions.workerSrc=SRC+'pdf.worker.min.js'; }catch(e){ return; }
+    decks.forEach(renderDeck);
+  };
+  s.onerror=()=>{};   // keep placeholder if the library cannot load
+  document.head.appendChild(s);
+
+  async function renderDeck(el){
+    const url=el.dataset.pdf;
+    try{
+      const pdf=await window.pdfjsLib.getDocument(url).promise;
+      const page=await pdf.getPage(1);
+      const dpr=Math.min(window.devicePixelRatio||1,2);
+      const rect=el.getBoundingClientRect();
+      const base=page.getViewport({scale:1});
+      const scale=Math.max(0.3,(rect.width*dpr)/base.width);
+      const vp=page.getViewport({scale});
+      const cv=document.createElement('canvas');
+      cv.className='deck-canvas';
+      cv.width=vp.width; cv.height=vp.height;
+      await page.render({canvasContext:cv.getContext('2d'),viewport:vp}).promise;
+      el.textContent='';
+      el.appendChild(cv);
+    }catch(e){ /* no file yet: leave the placeholder text */ }
+  }
+})();
+
+/* ===== project + headshot images ===== */
+(function(){
+  document.querySelectorAll('.proj-media[data-img],.headshot[data-img]').forEach(el=>{
+    loadThumb(el, el.dataset.img, '');
+  });
 })();
 
 /* ===== project filters ===== */
